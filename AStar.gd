@@ -1,13 +1,22 @@
 extends Spatial
 
 
+export (bool) var should_draw_cubes := false
+
 var grid_step := 1.0
 var grid_y := 0.5
 var points := {}
 var astar = AStar.new()
 
+var cube_mesh = CubeMesh.new()
+var red_material = SpatialMaterial.new()
+var green_material = SpatialMaterial.new()
+
 
 func _ready() -> void:
+	red_material.albedo_color = Color.red
+	green_material.albedo_color = Color.green
+	cube_mesh.size = Vector3(0.25, 0.25, 0.25)
 	var pathables = get_tree().get_nodes_in_group("pathable")
 	_add_points(pathables)
 	_connect_points()
@@ -36,6 +45,7 @@ func _add_point(point: Vector3):
 
 	astar.add_point(id, point)
 	points[world_to_astar(point)] = id
+	_create_nav_cube(point)
 
 
 func _connect_points():
@@ -55,6 +65,19 @@ func _connect_points():
 					var neighbor_id = points[potential_neighbor]
 					if not astar.are_points_connected(current_id, neighbor_id):
 						astar.connect_points(current_id, neighbor_id)
+						if should_draw_cubes:
+							get_child(current_id).material_override = green_material
+							get_child(neighbor_id).material_override = green_material
+
+
+func _create_nav_cube(position: Vector3):
+	if should_draw_cubes:
+		var cube = MeshInstance.new()
+		cube.mesh = cube_mesh
+		cube.material_override = red_material
+		add_child(cube)
+		position.y = grid_y
+		cube.global_transform.origin = position
 
 
 func find_path(from: Vector3, to: Vector3) -> Array:

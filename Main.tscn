@@ -31,11 +31,13 @@ current = true
 
 [node name="AStar" type="Spatial" parent="."]
 script = ExtResource( 3 )
+should_draw_cubes = true
 
 [node name="Ground1" type="StaticBody" parent="." groups=["pathable"]]
 transform = Transform( 10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Ground1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
