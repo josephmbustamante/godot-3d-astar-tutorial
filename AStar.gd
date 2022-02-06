@@ -3,7 +3,7 @@ extends Spatial
 
 export (bool) var should_draw_cubes := false
 
-var grid_step := 1.0
+var grid_step := 2.0
 var grid_y := 0.5
 var points := {}
 var astar = AStar.new()

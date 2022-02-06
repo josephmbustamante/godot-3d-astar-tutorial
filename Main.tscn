@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://PlayerController.gd" type="Script" id=2]
 [ext_resource path="res://AStar.gd" type="Script" id=3]
+[ext_resource path="res://ObstacleContainer.gd" type="Script" id=4]
+[ext_resource path="res://Main.gd" type="Script" id=5]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -24,6 +26,7 @@ albedo_color = Color( 0.207843, 0.207843, 0.239216, 1 )
 albedo_color = Color( 1, 0.415686, 0.415686, 1 )
 
 [node name="Main" type="Spatial"]
+script = ExtResource( 5 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 15, 10 )
@@ -37,7 +40,6 @@ should_draw_cubes = true
 transform = Transform( 10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Ground1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
@@ -48,12 +50,14 @@ shape = SubResource( 3 )
 transform = Transform( 5, 0, 0, 0, 0.5, 0, 0, 0, 5, 15, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Ground2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 8 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Ground2"]
 shape = SubResource( 3 )
+
+[node name="ObstacleContainer" type="Spatial" parent="."]
+script = ExtResource( 4 )
 
 [node name="Player" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
