@@ -47,7 +47,7 @@ material/0 = SubResource( 2 )
 shape = SubResource( 3 )
 
 [node name="Ground2" type="StaticBody" parent="." groups=["pathable"]]
-transform = Transform( 5, 0, 0, 0, 0.5, 0, 0, 0, 5, 15, 0, 0 )
+transform = Transform( 5, 0, 0, 0, 0.5, 0, 0, 0, 5, 15, 0, 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Ground2"]
 mesh = SubResource( 1 )

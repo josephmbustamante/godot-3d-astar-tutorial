@@ -3,14 +3,19 @@ extends Spatial
 
 const OBSTACLE = preload("res://Obstacle.tscn")
 
+signal obstacle_added(obstacle)
+signal obstacle_removed(obstacle)
+
 
 func create_obstacle(location: Vector3):
 	var obstacle_instance = OBSTACLE.instance()
 	add_child(obstacle_instance)
 	obstacle_instance.global_transform.origin = location
+	emit_signal("obstacle_added", obstacle_instance)
 
 
 func delete_obstacle(obstacle: StaticBody):
+	emit_signal("obstacle_removed", obstacle)
 	obstacle.queue_free()
 
 
